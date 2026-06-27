@@ -1,0 +1,111 @@
+# Sistem Kasir Kafe (POS System)
+
+Program simulasi kasir kafe berbasis CLI, dibuat untuk Tugas Akhir Praktikum
+Struktur Data dan Algoritma (Tema 3: POS System).
+
+## Deskripsi Proyek
+
+Aplikasi kasir ritel yang menangani transaksi penjualan, pencarian data
+produk berdasarkan ID, manajemen antrean pembayaran pelanggan di meja kasir,
+dan pembatalan item belanjaan terakhir (Void/Undo) dengan pemulihan stok
+otomatis.
+
+## Anggota Kelompok
+
+| Nama Lengkap | NIM | Kontribusi |
+|---|---|---|
+| [Isi Nama] | [Isi NIM] | [Isi kontribusi] |
+| [Isi Nama] | [Isi NIM] | [Isi kontribusi] |
+| [Isi Nama] | [Isi NIM] | [Isi kontribusi] |
+
+## Fitur Utama
+
+1. **Layar Sentuh Pelanggan (Kiosk)** — pelanggan memilih menu sendiri,
+   menambah item, melihat keranjang, melakukan undo item terakhir, atau
+   membatalkan seluruh pesanan, sebelum masuk ke antrean kasir.
+2. **Meja Kasir** — kasir memproses pelanggan paling depan dalam antrean,
+   menghitung total, validasi uang pembayaran, menghitung kembalian, dan
+   mencetak struk.
+3. **Pencarian Produk Instan** — cari data produk (ID, nama, harga, stok)
+   secara langsung tanpa looping satu per satu.
+4. **Validasi Input** — program menolak input non-angka, jumlah pesanan
+   lebih besar dari stok, serta uang pembayaran yang kurang dari total.
+
+## Struktur Data dan Algoritma yang Digunakan
+
+### 1. `HashMap<String, Produk>` — Database Produk
+- **Alasan dipilih:** kebutuhan tugas adalah pencarian harga dan data
+  barang secara instan berdasarkan ID/Barcode. HashMap menyimpan data
+  dalam bentuk *key-value* dan memakai *hashing* untuk menentukan lokasi
+  data, sehingga tidak perlu memeriksa data satu per satu seperti pada
+  array atau list biasa.
+- **Kompleksitas:** `get()` dan `put()` rata-rata **O(1)**.
+- **Lokasi kode:** `DatabaseProduk.java`.
+
+### 2. `Stack<ItemPesanan>` — Keranjang Belanja per Pelanggan
+- **Alasan dipilih:** spesifikasi tugas secara eksplisit meminta fitur
+  pembatalan **item belanjaan terakhir** (Void/Undo) yang otomatis
+  memulihkan stok. Sifat Stack yang LIFO (*Last In, First Out*) cocok
+  satu-satu dengan kebutuhan ini — barang yang paling akhir dimasukkan
+  adalah barang pertama yang dihapus saat `pop()` dipanggil.
+- **Kompleksitas:** `push()`, `pop()`, `peek()` semua **O(1)**.
+- **Lokasi kode:** dipakai di `Pelanggan.java` (field `keranjang`) dan
+  diproses di `Main.java` pada method `undoItemTerakhir()` dan
+  `batalkanTransaksi()`.
+
+### 3. `Queue<Pelanggan>` (implementasi `LinkedList`) — Antrean Pembayaran
+- **Alasan dipilih:** kebutuhan tugas adalah "manajemen antrean pelanggan
+  di loket pembayaran". Queue bersifat FIFO (*First In, First Out*),
+  pelanggan yang lebih dulu selesai memilih menu akan lebih dulu dipanggil
+  dan diproses pembayarannya oleh kasir, sama seperti antrean kasir di
+  dunia nyata.
+- **Kompleksitas:** `offer()` (enqueue) dan `poll()` (dequeue) **O(1)**.
+- **Lokasi kode:** field `antreanKasir` di `Main.java`, dipakai pada
+  method `prosesKioskPelanggan()` (saat enqueue) dan
+  `prosesMejaKasir()` (saat dequeue).
+
+## Alur Program
+
+```
+START
+  └─ Load data produk awal ke HashMap
+  └─ Menu Utama
+      ├─ 1. Layar Sentuh Pelanggan (Kiosk)
+      │     └─ Buat Stack keranjang baru
+      │     └─ Input ID Produk → cari di HashMap
+      │     └─ Input jumlah → validasi stok → push ke Stack, kurangi stok
+      │     └─ Menu Transaksi: Tambah Lagi / Undo (pop Stack, balikin stok) /
+      │        Lihat Keranjang / Selesai (enqueue ke Queue) / Batal (kosongkan Stack)
+      │
+      ├─ 2. Meja Kasir
+      │     └─ peek() pelanggan terdepan di Queue
+      │     └─ poll() pelanggan dari Queue
+      │     └─ Hitung total dari Stack keranjang pelanggan tersebut
+      │     └─ Validasi uang bayar → hitung kembalian → cetak struk
+      │
+      └─ 3. Keluar
+```
+
+## Cara Menjalankan Program
+
+Program ini murni Java (Pure Java), tidak ada dependensi/library
+eksternal selain `java.util.*` (sudah bawaan JDK).
+
+1. Pastikan JDK sudah terpasang (disarankan JDK 17 ke atas).
+2. Buka terminal, masuk ke folder `src`.
+3. Compile semua file:
+   ```
+   javac *.java
+   ```
+4. Jalankan program:
+   ```
+   java Main
+   ```
+5. Ikuti instruksi di menu CLI (ketik nomor pilihan, lalu tekan Enter).
+
+## Library Eksternal
+
+Tidak ada. Program hanya memakai library standar bawaan Java
+(`java.util.HashMap`, `java.util.Stack`, `java.util.Queue`,
+`java.util.LinkedList`, `java.util.Scanner`), sesuai ketentuan tugas
+yang memperbolehkan Collection Framework bawaan Java.
