@@ -1,8 +1,6 @@
-/**
- * Class Produk merepresentasikan satu item menu di kafe.
- * Disimpan sebagai value di dalam HashMap<String, Produk>
- * supaya pencarian by ID bisa O(1) (gak perlu looping satu-satu).
- */
+
+ // Class Produk merepresentasikan satu item menu di kafe
+ // Disimpan sebagai value di dalam HashMap<String, Produk> supaya pencarian by ID bisa O(1) (gak perlu looping satu-satu)
 public class Produk {
     private String id;
     private String nama;

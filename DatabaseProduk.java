@@ -1,17 +1,13 @@
 import java.util.HashMap;
 
-/**
- * DatabaseProduk membungkus HashMap<String, Produk> sebagai
- * "database" menu kafe. Key-nya ID produk, value-nya objek Produk.
- *
- * Analisis Kompleksitas:
- * - cariProduk(id)  -> O(1) rata-rata, karena HashMap pakai hashing,
- *                      gak perlu looping kayak ArrayList/LinkedList.
- * - tambahProduk()  -> O(1) rata-rata, sama alasannya.
- *
- * Ini struktur data yang paling pas buat kebutuhan "pencarian harga
- * dan data barang secara instan berdasarkan ID/Barcode" di spek tugas.
- */
+// DatabaseProduk membungkus HashMap<String, Produk> sebagai "database" menu kafe, key-nya ID produk, value-nya objek Produk
+
+// Analisis Kompleksitas:
+// cariProduk(id)  = O(1) rata-rata, karena HashMap pakai hashing, gak perlu looping kayak ArrayList/LinkedList
+// tambahProduk()  = O(1) rata-rata, sama alasannya
+
+// Ini struktur data yang paling pas buat kebutuhan "pencarian harga, dan data barang secara instan berdasarkan ID/Barcode" di spek tugas
+
 public class DatabaseProduk {
     private HashMap<String, Produk> dataProduk;
 
@@ -23,7 +19,7 @@ public class DatabaseProduk {
         dataProduk.put(produk.getId(), produk);
     }
 
-    // O(1) rata-rata, ini inti dari kenapa HashMap dipilih.
+    // O(1) rata-rata, ini inti dari kenapa HashMap dipilih
     public Produk cariProduk(String id) {
         return dataProduk.get(id);
     }

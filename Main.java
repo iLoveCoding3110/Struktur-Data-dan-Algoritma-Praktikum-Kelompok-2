@@ -1,22 +1,28 @@
+// Kelompok 2 
+// Nama Anggota:
+// Eskiela Vatsabel Agatya	L0125010
+// Nesya Saphira Ramadhani	L0125058
+// Fawwaz Ajjihad           L0125099
+
+
+
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 import java.util.Stack;
 
-/**
- * SISTEM KASIR KAFE
- * -----------------
- * Struktur data yang dipakai:
- * 1. HashMap<String, Produk>      -> Database menu, buat cari produk O(1)
- * 2. Stack<ItemPesanan>           -> Keranjang tiap pelanggan, buat Undo/Void item terakhir O(1)
- * 3. Queue<Pelanggan>             -> Antrean pembayaran di kasir, prinsip FIFO
- *
- * Alur program:
- * - Menu 1 (Kiosk Pelanggan)  : pelanggan pesan barang, masuk ke Stack keranjang,
- *                                kalau udah fix dia di-enqueue ke antrean kasir.
- * - Menu 2 (Meja Kasir)       : kasir proses antrean paling depan (dequeue),
- *                                hitung total dari Stack keranjangnya, cetak struk.
- */
+
+ // SISTEM KASIR KAFE
+
+  // Struktur data yang dipakai:
+  // 1. HashMap<String, Produk> = Database menu, buat cari produk O(1)
+  // 2. Stack<ItemPesanan>      = Keranjang tiap pelanggan, buat Undo/Void item terakhir O(1)
+  // 3. Queue<Pelanggan>        = Antrean pembayaran di kasir, prinsip FIFO
+ 
+  // Alur program
+  // Menu 1 (Kiosk Pelanggan)  : pelanggan pesan barang, masuk ke Stack keranjang, kalau udah fix dia di-enqueue ke antrean kasir.
+  // Menu 2 (Meja Kasir)       : kasir proses antrean paling depan (dequeue), hitung total dari Stack keranjangnya, cetak struk.
+ 
 public class Main {
 
     static Scanner scanner = new Scanner(System.in);
@@ -49,7 +55,7 @@ public class Main {
         scanner.close();
     }
 
-    // Ngisi HashMap database produk dengan data awal (hardcoded).
+    // Ngisi HashMap database produk dengan data awal (hardcoded)
     static void loadDataAwal() {
         databaseProduk.tambahProduk(new Produk("KF001", "Americano", 18000, 20));
         databaseProduk.tambahProduk(new Produk("KF002", "Latte", 22000, 20));
@@ -69,7 +75,7 @@ public class Main {
         System.out.println("==================================================");
     }
 
-    // ====================== FASE 1: KIOSK PELANGGAN ======================
+    // FASE 1: KIOSK PELANGGAN
 
     static void prosesKioskPelanggan() {
         Stack<ItemPesanan> keranjang = new Stack<>();
@@ -88,7 +94,7 @@ public class Main {
                 int pilihanOpsi = tampilkanMenuTransaksi();
 
                 if (pilihanOpsi == 1) {
-                    // Tambah menu lagi -> balik ke atas loop, input ID lagi
+                    // Tambah menu lagi, balik ke atas loop, input ID lagi
                     continue;
                 } else if (pilihanOpsi == 2) {
                     undoItemTerakhir(keranjang);
@@ -159,7 +165,7 @@ public class Main {
         }
     }
 
-    // Submenu transaksi: tambah lagi / undo / lihat keranjang / selesai / batal
+    // Submenu transaksi: tambah lagi, undo, lihat keranjang, selesai dan batal
     static int tampilkanMenuTransaksi() {
         System.out.println("\n-------------- MENU TRANSAKSI --------------");
         System.out.println("1. Tambah Menu Lagi");
@@ -171,7 +177,7 @@ public class Main {
         return inputAngka("Pilih opsi: ");
     }
 
-    // Undo pakai pop() dari Stack, sekaligus balikin stok produk di HashMap.
+    // Undo pakai pop() dari Stack, sekaligus balikin stok produk di HashMap
     static void undoItemTerakhir(Stack<ItemPesanan> keranjang) {
         if (keranjang.isEmpty()) {
             System.out.println("\nKeranjang kosong, gak ada yang bisa di-undo.\n");
@@ -205,7 +211,7 @@ public class Main {
         System.out.println("----------------------------------------------\n");
     }
 
-    // Batalkan transaksi -> balikin semua stok, kosongkan stack.
+    // Batalkan transaksi, balikin semua stok, kosongkan stack
     static void batalkanTransaksi(Stack<ItemPesanan> keranjang) {
         while (!keranjang.isEmpty()) {
             ItemPesanan item = keranjang.pop();
@@ -217,7 +223,7 @@ public class Main {
         System.out.println("\nTransaksi dibatalkan, semua stok udah dibalikin.\n");
     }
 
-    // ====================== FASE 2: MEJA KASIR ======================
+    // FASE 2: MEJA KASIR 
 
     static void prosesMejaKasir() {
         System.out.println("\n================ MEJA KASIR ================");
@@ -232,7 +238,7 @@ public class Main {
         System.out.print("\nTekan Enter buat panggil dan proses pesanan terdepan...");
         scanner.nextLine();
 
-        // Ambil pelanggan paling depan dari Queue -> prinsip FIFO
+        // Ambil pelanggan paling depan dari Queue (prinsip FIFO)
         Pelanggan pelanggan = antreanKasir.poll();
 
         System.out.println("\nMemproses pesanan atas nama: " + pelanggan.getNama());
@@ -274,9 +280,9 @@ public class Main {
         System.out.println("=================================================");
     }
 
-    // ====================== UTILITAS INPUT ======================
+    // UTILITAS INPUT 
 
-    // Helper buat ambil input angka, biar program gak crash kalau user salah ketik.
+    // Helper buat ambil input angka, biar program gak crash kalau user salah ketik
     static int inputAngka(String label) {
         while (true) {
             try {

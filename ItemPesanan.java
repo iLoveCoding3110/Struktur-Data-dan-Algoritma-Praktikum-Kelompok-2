@@ -1,8 +1,8 @@
-/**
- * Class ItemPesanan merepresentasikan satu baris item yang udah dipesan
- * pelanggan, isinya snapshot dari Produk (id, nama, harga saat dipesan)
- * plus jumlahnya. Objek ini yang nanti di-push/pop ke Stack keranjang.
- */
+
+ // Class ItemPesanan merepresentasikan satu baris item yang udah dipesan
+ // pelanggan, isinya snapshot dari Produk (id, nama, harga saat dipesan)
+ // plus jumlahnya,bjek ini yang nanti di-push/pop ke Stack keranjang
+
 public class ItemPesanan {
     private String idProduk;
     private String namaProduk;
