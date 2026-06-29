@@ -12,7 +12,7 @@ otomatis.
 
 ## Anggota Kelompok
 
-=========================================================== LEMBAR PENILAIAN KONTRIBUSI ANGGOTA KELOMPOK 2
+LEMBAR PENILAIAN KONTRIBUSI ANGGOTA KELOMPOK 2
 ===========================================================
 Tema Proyek : POS (Point of Sale) System
 Kelompok	: 2
