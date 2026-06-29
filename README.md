@@ -12,11 +12,26 @@ otomatis.
 
 ## Anggota Kelompok
 
-| Nama Lengkap | NIM | Kontribusi |
-|---|---|---|
-| [Isi Nama] | [Isi NIM] | [Isi kontribusi] |
-| [Isi Nama] | [Isi NIM] | [Isi kontribusi] |
-| [Isi Nama] | [Isi NIM] | [Isi kontribusi] |
+=========================================================== LEMBAR PENILAIAN KONTRIBUSI ANGGOTA KELOMPOK 2
+===========================================================
+Tema Proyek : POS (Point of Sale) System
+Kelompok	: 2
+
+
+1.	 Nama Anggota	:Eskiela Vatsabel Agatya NIM	: L0125010
+Kontribusi	: Merancang struktur data sistem, membuat Database Produk (HashMap), class Produk, DatabaseProduk, method loadDataAwal(), fitur pencarian produk berdasarkan ID, serta validasi stok produk.
+
+
+2.	 Nama Anggota 2	: Nesya Saphira Ramadhani NIM	: L0125058
+Kontribusi	: Merancang struktur data sistem, Mengembangkan modul Kiosk Pelanggan (meliputi proses pemesanan, keranjang belanja menggunakan Stack, fitur Undo/Void, melihat keranjang, pembatalan transaksi, validasi input pelanggan) serta mengintegrasi seluruh modul menjadi satu sistem.
+
+
+3.	 Nama Anggota 3	: Fawwaz Ajjihad NIM	: L0125099
+Kontribusi	: Mengembangkan modul Meja Kasir, meliputi antrean pembayaran menggunakan Queue, proses pembayaran, validasi uang, serta pencetakan struk.
+
+
+===========================================================
+
 
 ## Fitur Utama
 
@@ -36,7 +51,7 @@ otomatis.
 ### 1. `HashMap<String, Produk>` (Database Produk)
 - **Alasan dipilih:** kebutuhan tugas adalah pencarian data
   barang secara instan berdasarkan ID. HashMap menyimpan data
-  dalam bentuk *ID-Data* yang menggunakan sepaarate chaining dan memakai *hashing* untuk menentukan lokasi
+  dalam bentuk *ID-Data* yang menggunakan separate chaining dan memakai *hashing* untuk menentukan lokasi
   data, sehingga tidak perlu memeriksa data satu per satu seperti pada
   array atau list biasa.
 - **Kompleksitas:** `get()` dan `put()` rata-rata **O(1)**.
